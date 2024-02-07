@@ -1,0 +1,14 @@
+.notification{
+    background: red;
+    color: #fff;
+    height: 13px;
+  width: 13px;
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:-17%;
+  margin-right: -7%;
+}

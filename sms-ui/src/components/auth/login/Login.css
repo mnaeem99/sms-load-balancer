@@ -1,0 +1,131 @@
+.main {
+  width: 400px;
+  height: 60px;
+  padding-left: '10px';
+  background: #ffffff;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px 10px 0px 0px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.main:focus {
+  outline: none !important;
+  border-color: #18a0fb;
+}
+.mainTwo{
+  width: 400px;
+  height: 60px;
+  padding-left: '10px';
+  background: #ffffff;
+  border: 2px solid red;
+  border-radius: 10px 10px 0px 0px;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+}
+.mainTwo:focus {
+  outline: none !important;
+  border-color: red;
+}
+.btnTwo {
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  height: 60px;
+  cursor: pointer;
+  border: none;
+  color: '#fff !important';
+  /* sea blue */
+
+  background: linear-gradient(90deg, #2b5876 0%, #4e4376 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+.circle {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  align-items: center;
+  margin-top: -44px;
+  margin-left: 200px;
+  margin-right: auto;
+  background: #ffffff;
+  /* drop shadow */
+
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+.paragraph-Style{
+  font-size: 30px !important;
+}
+
+@media screen and (max-width: 1280px) {
+  .main {
+    width: 300px;
+    height: 60px;
+  }
+  .mainTwo{
+    width: 300px;
+    height: 60px;
+  }
+  .circle {
+    margin-top: -44px !important;
+    margin-left: 150px !important;
+
+  }
+}
+@media screen and (max-width: 1000px) {
+  .main {
+    width: 250px;
+    height: 60px;
+  }
+  .mainTwo {
+    width: 250px;
+    height: 60px;
+  }
+  .circle {
+    margin-top: -44px !important;
+    margin-left: 150px !important;
+
+  }
+}
+@media screen and (max-width: 960px) {
+  .main {
+    width: 250px;
+    height: 60px;
+  }
+  .mainTwo {
+    width: 250px;
+    height: 60px;
+  }
+  .circle {
+    margin-top: -44px !important;
+    margin-left: 115px !important;
+
+  }
+}
+.user-circle-regular-wrapper {
+  background-color: var(--white);
+  border-radius: 44px;
+  box-shadow: var(--drop-shadow);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: -8%;
+}
+@media only screen and (max-width: 600px) {
+  .circle {
+    margin-top: 10px !important;
+  }
+  .paragraph-Style{
+    font-size: 20px !important;
+  }
+}

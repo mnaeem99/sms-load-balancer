@@ -1,0 +1,64 @@
+.login-button {
+  align-items: center;
+  background-color: #ffa80c;
+  border-radius: 52px;
+  display: flex;
+  padding: 5px 11px;
+  position: relative;
+}
+
+.div {
+  height: 24px;
+  position: relative;
+  width: 125px;
+}
+
+.user-icon {
+  height: 24px !important;
+  left: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 24px !important;
+  margin-left: 5%;
+  color: #ffffff;
+}
+
+.dashboard {
+  color: #ffffff;
+  font-family: "Roboto", Helvetica;
+  /* font-size: 24px; */
+  font-weight: 400;
+  left: 48px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 4px;
+  white-space: nowrap;
+}
+
+.text-welcome {
+  color: #ffffff;
+  font-family: "Roboto", Helvetica;
+  font-size: 60px;
+  font-weight: 500;
+  height: 100%;
+  left: 100px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 252px;
+  white-space: nowrap;
+}
+
+.text-employee-management {
+  color: #ffa80c;
+  font-family: "Roboto", Helvetica;
+  font-size: 80px;
+  font-weight: 800;
+  height: 100%;
+  left: 100px;
+  letter-spacing: 0;
+  line-height: 79.2px;
+  position: absolute;
+  top: 330px;
+}
