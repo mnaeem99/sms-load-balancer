@@ -5,6 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.server.loadbalancer.model.RefreshToken;
 import com.server.loadbalancer.model.UserEntity;
 import com.server.loadbalancer.repository.RefreshTokenRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -62,6 +64,14 @@ public class SecurityUtils {
         Base64.Encoder encoder = Base64.getUrlEncoder().withoutPadding();
         return encoder.encodeToString(bytes);
     }
+    public static UserEntity getLoggedInUser(){
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user instanceof UserEntity){
+            return (UserEntity) user;
+        }
+        throw new EntityNotFoundException("User not found");
+    }
+
 }
 
 

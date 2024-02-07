@@ -1,10 +1,10 @@
 package com.server.loadbalancer.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class SmsRequest {
@@ -16,7 +16,11 @@ public class SmsRequest {
     private String message;
     private String phone;
     private String status;
-
+    private String appId;
+    private LocalDateTime createdAt;
+    private LocalDate date;
+    @ManyToOne
+    private UserEntity sentBy;
 
     public SmsRequest() {
     }
@@ -51,5 +55,37 @@ public class SmsRequest {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public UserEntity getSentBy() {
+        return sentBy;
+    }
+
+    public void setSentBy(UserEntity sentBy) {
+        this.sentBy = sentBy;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

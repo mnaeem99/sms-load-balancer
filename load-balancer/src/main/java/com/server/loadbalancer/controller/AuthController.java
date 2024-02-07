@@ -2,6 +2,7 @@ package com.server.loadbalancer.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.server.loadbalancer.dto.LoginDto;
+import com.server.loadbalancer.dto.UserDto;
 import com.server.loadbalancer.model.UserEntity;
 import com.server.loadbalancer.security.SecurityConstants;
 import com.server.loadbalancer.security.SecurityUtils;
@@ -31,12 +32,18 @@ public class AuthController {
         this.securityUtils = securityUtils;
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/login")
     public ResponseEntity<HashMap<String, String>> login(@RequestBody LoginDto request) {
         return ResponseEntity.ok(userService.login(request));
     }
+    @GetMapping("/profile")
+    public ResponseEntity<UserDto> profile() {
+        UserEntity user = SecurityUtils.getLoggedInUser();
+        UserDto userDto = new UserDto(user.getId(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getPhone(),user.getRole(),user.getActive(),user.getCreatedAt(),user.getModifiedAt());
+        return ResponseEntity.ok(userDto);
+    }
 
-    @GetMapping("/api/access-token")
+    @GetMapping("/access-token")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String authorizationHeader = request.getHeader(SecurityConstants.HEADER_STRING);
         if (authorizationHeader.startsWith(SecurityConstants.TOKEN_PREFIX)) {

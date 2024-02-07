@@ -1,16 +1,22 @@
 package com.server.loadbalancer.service;
 
 import com.server.loadbalancer.dto.MessagesRequestDto;
+import com.server.loadbalancer.dto.NoOfRequestDto;
 import com.server.loadbalancer.dto.SmsRequestDto;
 import com.server.loadbalancer.model.SmsRequest;
 import com.server.loadbalancer.repository.SmsRequestRepository;
+import com.server.loadbalancer.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -35,6 +41,9 @@ public class SmsService {
         SmsRequest smsRequest = new SmsRequest();
         smsRequest.setMessage(smsRequestDto.getMessage());
         smsRequest.setPhone(smsRequestDto.getPhone());
+        smsRequest.setAppId(providerName);
+        smsRequest.setCreatedAt(LocalDateTime.now());
+        smsRequest.setSentBy(SecurityUtils.getLoggedInUser());
 
         // Update the status based on the response from SMS provider
         smsRequest.setStatus(responseEntity.getBody());
@@ -142,9 +151,13 @@ public class SmsService {
                 SmsRequest smsRequest = new SmsRequest();
                 smsRequest.setMessage(smsRequestDto.getMessage());
                 smsRequest.setPhone(smsRequestDto.getPhone());
+                smsRequest.setAppId("sms-service-2");
+                smsRequest.setCreatedAt(LocalDateTime.now());
+                smsRequest.setDate(LocalDate.now());
+                smsRequest.setSentBy(SecurityUtils.getLoggedInUser());
 
                 // Update the status based on the response from SMS provider
-                smsRequest.setStatus(responseEntity.getBody());
+                smsRequest.setStatus(otherResponseEntity.getBody());
 
                 return smsRequest;
             }
@@ -153,11 +166,28 @@ public class SmsService {
             SmsRequest smsRequest = new SmsRequest();
             smsRequest.setMessage(smsRequestDto.getMessage());
             smsRequest.setPhone(smsRequestDto.getPhone());
+            smsRequest.setAppId("sms-service-2");
+            smsRequest.setCreatedAt(LocalDateTime.now());
+            smsRequest.setDate(LocalDate.now());
+            smsRequest.setSentBy(SecurityUtils.getLoggedInUser());
 
             // Update the status based on the response from SMS provider
             smsRequest.setStatus(responseEntity.getBody());
 
             return smsRequest;
         };
+    }
+    public Page<SmsRequest> getSmsRequests(String year, String month, String keyword, Pageable pageable) {
+        LocalDate localDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), 1);
+        LocalDateTime startOfDay = localDate.atStartOfDay();
+        LocalDateTime endOfDay = localDate.plusMonths(1).atStartOfDay();
+        return smsRequestRepository.findAll(keyword, startOfDay, endOfDay, pageable);
+    }
+    public List<NoOfRequestDto> getNoOfRequests(String year, String month) {
+        return smsRequestRepository.findNoOfRequest(Integer.parseInt(month), Integer.parseInt(year));
+    }
+
+    public Long getNoOfProviderRequests(String appId) {
+        return smsRequestRepository.getNoOfProviderRequests(appId);
     }
 }
